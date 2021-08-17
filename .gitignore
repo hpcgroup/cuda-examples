@@ -1,0 +1,10 @@
+matmul/matmul-template 
+matmul/matmul 
+matmul/matmul-simple 
+saxpy/saxpy-single-block 
+saxpy/saxpy 
+cuda-memory/cuda-memory 
+matrix-add/matrix-add 
+test-cuda/test-cuda
+*.out
+*.cubin
