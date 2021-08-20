@@ -15,6 +15,9 @@ TARGETS = $(patsubst %.cu,%, $(CU_FILES))
 
 all: $(TARGETS)
 
+streams/stream-test: streams/stream-test.cu
+	$(CUDA) $(CUDAFLAGS) --default-stream per-thread $(GENCODE) -o $@ $<
+
 %: %.cu
 	$(CUDA) $(CUDAFLAGS) $(GENCODE) -o $@ $<
 
