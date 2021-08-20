@@ -6,5 +6,7 @@ saxpy/saxpy
 cuda-memory/cuda-memory 
 matrix-add/matrix-add 
 test-cuda/test-cuda
+streams/stream-test-simple
+streams/stream-test
 *.out
 *.cubin
