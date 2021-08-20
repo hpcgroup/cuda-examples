@@ -49,7 +49,7 @@ int main() {
 
     double *h_C, *h_A, *h_B;
     double *d_C, *d_A, *d_B;
-    const size_t M = 1500, P = 1500, N = 800;
+    const size_t M = 1024, P = 1024, N = 1024;
 
     h_C = new double[M*N];
     h_A = new double[M*P];
