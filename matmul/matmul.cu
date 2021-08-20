@@ -49,7 +49,7 @@ int main() {
 
     double *h_C, *h_A, *h_B;
     double *d_C, *d_A, *d_B;
-    const size_t M = 512, P = 512, N = 256;
+    const size_t M = 1500, P = 1500, N = 800;
 
     h_C = new double[M*N];
     h_A = new double[M*P];
@@ -78,8 +78,22 @@ int main() {
     dim3 numBlocks (
         N/threadsPerBlock.x + (M%threadsPerBlock.x != 0),
         M/threadsPerBlock.y + (N%threadsPerBlock.y != 0));
-    matmul<<<numBlocks, threadsPerBlock>>>(d_C, d_A, d_B, M, P, N);
 
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+
+    cudaEventRecord(start, 0);
+    matmul<<<numBlocks, threadsPerBlock>>>(d_C, d_A, d_B, M, P, N);
+    cudaEventRecord(stop, 0);
+    cudaEventSynchronize(stop);
+
+    float elapsed;
+    cudaEventElapsedTime(&elapsed, start, stop);
+
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
+    printf("Elapsed time = %f\n", elapsed);
 
     cudaMemcpy(h_C, d_C, M*N*sizeof(double), cudaMemcpyDeviceToHost);
 
